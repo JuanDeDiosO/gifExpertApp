@@ -1,7 +1,9 @@
 import { Card, CardHeader, CardBody, Image } from '@nextui-org/react'
 import { validateGifName } from '../helpers/validateGifName'
 
-export const GifCard = ({ title, src, slug }) => {
+import { string } from 'prop-types'
+
+export const GifCard = ({ title, src }) => {
   const name = validateGifName(title)
 
   return (
@@ -11,7 +13,7 @@ export const GifCard = ({ title, src, slug }) => {
       </CardHeader>
       <CardBody className='overflow-visible p-0'>
         <Image
-          alt={slug}
+          alt={title}
           className='w-full object-cover rounded-b-2xl h-[200px]'
           src={src}
           width='100%'
@@ -19,4 +21,9 @@ export const GifCard = ({ title, src, slug }) => {
       </CardBody>
     </Card>
   )
+}
+
+GifCard.propTypes = {
+  title: string.isRequired,
+  src: string.isRequired,
 }

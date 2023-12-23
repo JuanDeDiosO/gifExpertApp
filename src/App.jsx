@@ -23,8 +23,8 @@ function App () {
       {/* Categories area */}
       <div className='max-w-7xl mx-auto'>
         {categories.map(category => (
-          <GifGrid key={category} categoryName={category} />
-        ))}
+              <GifGrid key={category} categoryName={category} />
+            ))}
       </div>
       {/* Gif list */}
     </>

@@ -1,5 +1,6 @@
 import { Input, Button } from '@nextui-org/react'
 import { useState } from 'react'
+import { func } from 'prop-types'
 
 export const NavForm = ({ onAddCategory }) => {
   const [value, setValue] = useState('')
@@ -7,18 +8,26 @@ export const NavForm = ({ onAddCategory }) => {
   const handleOnSubmit = event => {
     event.preventDefault()
 
-    onAddCategory(value)
+    if (value.trim().length <= 1) return
+
+    onAddCategory(value.trim())
     setValue('')
   }
 
+  const handleOnChange = ({ target }) => setValue(target.value)
+
   return (
-    <form onSubmit={handleOnSubmit} className='col-start-1 col-end-5'>
+    <form
+      onSubmit={handleOnSubmit}
+      className='col-start-1 col-end-5'
+      aria-label='form'
+    >
       <Input
         type='text'
         radius='2xl'
         color={'secondary'}
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={handleOnChange}
         endContent={
           <Button color='secondary' type='submit'>
             Buscar
@@ -28,4 +37,8 @@ export const NavForm = ({ onAddCategory }) => {
       />
     </form>
   )
+}
+
+NavForm.propTypes = {
+  onAddCategory: func.isRequired
 }
